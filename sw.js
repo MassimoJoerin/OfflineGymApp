@@ -6,18 +6,19 @@
  * Changelog
  * v1 (2026-10-04): Erste Version.
  * v2 (2026-10-04): Cache-Version fuer index.html v2 (eingebettetes Icon).
+ * v3 (2026-10-04): Neue Icons (maskable randlos gelb, kein schwarzer Rand).
  *
  * WICHTIG: Bei jeder Aenderung an index.html CACHE_VERSION erhoehen, sonst
  * liefert das Handy weiterhin die alte Version aus dem Cache.
  */
-const CACHE_VERSION = "gym-log-v2";
+const CACHE_VERSION = "gym-log-v3";
 const APP_FILES = [
   "./",
   "./index.html",
   "./manifest.webmanifest",
-  "./icon-192.png",
-  "./icon-512.png",
-  "./icon-maskable-512.png",
+  "./icon-192-v3.png",
+  "./icon-512-v3.png",
+  "./icon-maskable-512-v3.png",
 ];
 
 // Installation: alle App-Dateien in den Cache laden
