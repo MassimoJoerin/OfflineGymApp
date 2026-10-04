@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0a0a0a">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.webmanifest">
+<!-- Icons als Data-URI eingebettet: so hat auch eine Verknuepfung auf die
+     lokale Datei (ohne PNG-Dateien daneben) ein Icon. -->
+<link rel="icon" type="image/png" sizes="192x192" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAIAAADdvvtQAAADtklEQVR4nO3cPY4TQRSFUQ8ickxIwP5XRUDIIgiQWpYY7LZv/bxnnbMBSlWfX3vaTX9cr9cLvOrL7gXQm4CICIiIgIgIiIiAiAiIiICICIiIgIgIiIiAiAiIiICICIiIgIgIiIiAiAiIiICICIiIgIh83b2Ae37//L57CVV8+/Fr9xI+91Ht/4WJ5qFSMVUJSDcvqFDS5oB0M8TGknZ+iVbPKBt3cs8Eks4k60fRhgmknnnW7+3SCSSdZZaNonUTSD0rLdvtRQGpZ701e74iIPXssmDnpweknr1m7//cgNRTwdRTmBiQeuqYdxYe5yAyKyDjp5pJJzIlIPXUNONcXMKIjA/I+Kls+OkMDkg99Y09I5cwIgIiMjIg168uBp6UCUREQESGBeT61cuo8zKBiAiIiICIjAnIF6COhpyaCUREQEQERERARAREREBEBEREQEQERKT0a37P+PRFOGXvjPda7Rm9J9D/XqNU4fWl/+q12pMaB3R/36udSq/Vntc4ICoQEBEBEREQEQERERARAREREJGKP2W83/3+17TYh3IT6C3v97+gyz7UCuhd7/c/q9E+1AqIdgREREBEBEREQEQERERARAREREBEBEREQEQERERARAREpOIDZXc89SRDqcceHuq12oMJRERARAREREBEBEREQEQERERARAREREBEBESk2W9ht68WePjjUan3EDy12ka/i5lARAREREBEBEREQEQERERARAREREBEBEREQEQERERARAREREBEagV0/wmeUs/3TNVoH2oFdPn/7pTatQW67EPFJxKr7dEuLfah3ASiFwERERARAREREBEBEREQEQERaRxQo/v9l26rPa9xQJc+9/v/6rXakyr+lPGUXrvfa7Vn9J5AbCcgIgIiIiAiAiIiICICIiIgIgIiMiagRq+l5TDk1EwgIgIiIiAiwwLyNaiXUedlAhEREJGRAbmKdTHwpEwgIgIiMjggV7H6xp7R+AmkocqGn45LGJEpARlCNc04l1kTSEPVTDoRlzAiEwMyhOqYdxZzJ5CGKph6CtMvYRraa/b+r/gOpKFdFuz8oi/RGlpvzZ6v+ytMQyst2+2P6/W65l86vN87ckpZ/EHdcB/IKJpn/d5umEAHo2igXR/LnXeijaJRNu7kzgl0yzR6QYVPYJWADkp6qEI3h3IB3RLToVQ0t0oHRH0e5yAiICICIiIgIgIiIiAiAiIiICICIiIgIgIiIiAiAiIiICICIiIgIgIiIiAiAiIiICICIvIHb4HN07Ma/VEAAAAASUVORK5CYII=">
+<link rel="apple-touch-icon" sizes="512x512" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAIAAAB7GkOtAAALWklEQVR4nO3cu27cyBZA0Z4LR4oVKtD/f5UDhfqIG4zh8dgaqR/sJuvstVKjWwSq6mySFvTX09PTCYCe/+19AQDsQwAAogQAIEoAAKIEACBKAACiBAAgSgAAogQAIEoAAKIEACBKAACiBAAgSgAAogQAIEoAAKIEACBKAACiBAAgSgAAogQAIEoAAKIEACBKAACiBAAgSgAAogQAIEoAAKIEACBKAACiBAAgSgAAogQAIEoAAKIEACBKAACiBAAgSgAAogQAIEoAAKIEACBKAACiBAAgSgAAogQAIEoAAKIEACBKAACiBAAgSgAAogQAIEoAAKIEACBKAACiBAAgSgAAogQAIEoAAKIEACBKAACivu19AVzm/fvL3pcAn3l+fdv7EjjXX09PT3tfAx8z6xlDFY5JAA7ExCdCDw5CAHZm6BMnBjsSgH2Y+/AbJXg8AXgocx++pAQPIwAPYvTDRWTgAQTgvsx9uJES3I8A3IvRDxuSgXsQgO0Z/XAnMrAtAdiS0Q8PIANbEYBtGP3wYDJwOwG4ldEPO5KBW/hroDcx/WFfzuAtPAFcybaDQ/EocAUBuJjRD4clAxfxCugypj8cmRN6EQG4gL0Fx+ecns8roLPYUrAcr4O+5Anga6Y/rMjJ/ZIAfMEegnU5v5/zCug/2TowhtdBH/IE8DHTHyZxoj8kAB+wV2Ae5/pPAvA7uwSmcrp/IwD/Yn/AbM74rwTgH3YGFDjpPwnAD/YEdDjvfxOA08lugB6n/iQAJ/sAqpz9egDsACiLT4B0AOJrD5zac6AbgPKqA7/KToNoALLrDXyoOROiAQCgGIBm6oHPBSdDLgDBNQbOVJsPrQDUVhe4VGpKtAIAwE+hAKTCDlytMysqAeisKHC7yMRIBCCylsCGCnMjEQAA/jQ/AIWMA/cwfnrMDwAAHxoegPEBB+5q9gyZHIDZKwc8xuBJMjkAAHxibAAGRxt4sKnzZGwAAPjczABMzTWwl5FTZWYAAPjSwACMDDWwu3mzZWAAADjHtADMSzRwHMMmzLQAAHCmUQEYFmfggCbNmVEBAOB8AgAQNScAk57LgCMbM23mBACAiwwJwJggA0uYMXOGBACASwkAQNSEAMx4FgPWMmDyTAgAAFcQAICo5QMw4CkMWNTq82f5AABwHQEAiBIAgKi1A7D6CzhgdUtPobUDAMDVBAAgSgAAogQAIGrhACz9fy/AGOvOooUDAMAtBAAgSgAAogQAIEoAAKIEACBq1QCs+3tXwDyLTqRVAwDAjQQAIEoAAKIEACBKAACiBAAgSgAAogQAIEoAAKIEACBKAACiBAAgSgAAogQAIEoAAKIEACBKAACiBAAgSgAAogQAIEoAAKK+7X0B7On59e3Sj7x/f7nHlbAVa8r5BCDqijHx6weNjAOyplzKK6CiqyfFht/AtqwpVxCAnK3OuXlxHNaU6whAy7Yn3Lw4AmvK1QQAIEoAQu5xc+eGcV/WlFsIAECUAABECQBAlAAARAkAQJQAAEQJAECUAABECQBAlAAARAkAQJQAAEQJAECUAABECQBAlAAARAkAQJQAAEQJAECUAABECQBA1Le9L4Afnl/fLv3I+/eXe1wJXMruXZQA7O+Kw/PrBx0kdmT3Ls0roJ1dfX42/Aa4jt27OgHY01a73yni8ezeAQRgN9vue6eIR7J7ZxAAgCgB2Mc9bnncRvEYdu8YAgAQJQAAUQIAECUAAFECABAlAABRAgAQJQAAUQIAECUAAFECABAlAABRAgAQJQAAUQIAECUAAFECABAlAABRAgAQJQAAUQIAECUAAFECABAlAABRAgAQJQAAUQIAECUAAFECABAlAABRAgAQJQAAUQIAECUAAFECABAlAABRAgAQJQAAUQIAECUAAFECABD1be8LYEvPr2+RH8pdWdMITwAAUQIAECUAAFECABAlAABRAgAQJQAAUQIAECUAAFECABAlAABRAgAQJQAAUQIAECUAAFECABAlAABRAgAQJQAAUQIAECUAAFECABAlAABRAgAQJQAAUQIAECUAAFHf9r4AtvT+/eWTf31+fXv8D+WudlnTO/1QHs8TAECUAABECQBAlAAARAkAQJQAAEQJAECUAABECQBAlAAARAkAQJQAAEQJAECUAABECQBAlAAARAkAQJQAAEQJAECUAABECQBAlAAARAkAQJQAAEQJAECUAABECQBAlAAARAkAQJQAAEQJAECUAABECQBAlAAARAkAQJQAAEQJAECUAABECQBAlAAARAkAQJQAAEQJwD7ev78s8Z3wJ7t3DAEAiBKA3Wx7y+MGikeye2cQgD1tte+dHx7P7h1AAHZ2++53ftiL3bu6b3tfAD/OwPPr23UfhB3ZvUsTgKNwHliX3bsor4AAogQAIEoAAKIEACBKAACiBAAgSgAAogQAIEoAAKIEACBKAACiBAAgSgAAogQAIEoAAKIEACBKAACiBAAgSgAAogQAIEoAAKIEIOT9+8sS38n5rCm3EACAKAFo2fbmzq3iEVhTriYAOVudcJPiOKwp1xGAotvPuUlxNNaUK3zb+wLYx9+n/fn17boPckDWlEsJQJqTP4815XxeAQFECQBAlAAARAkAQJQAAEQJAECUAABECQBAlAAARAkAQJQAAEQJAECUAABECQBAlAAARAkAQJQAAEQJAECUAABECQBAlAAARK0agOfXt70vAeCHRSfSqgEA4EYCABAlAABRAgAQJQAAUQIAELVwABb9vStgmHVn0cIBAOAWAgAQJQAAUQIAELV2ANb9vxdghqWn0NoBAOBqAgAQJQAAUcsHYOkXcMDSVp8/ywcAgOsIAEDUhACs/hQGrGjA5JkQAACuIAAAUUMCMOBZDFjIjJkzJAAAXGpOAGYEGTi+MdNmTgAAuIgAAESNCsCY5zLgsCbNmVEBAOB80wIwKc7A0QybMNMCAMCZBgZgWKKBg5g3WwYGAIBzzAzAvFAD+xo5VWYGAIAvjQ3AyFwDu5g6T8YGAIDPTQ7A1GgDjzR4kkwOwGn0ygEPMHuGDA8AAP9lfgBmBxy4n/HTY34AAPhQIgDjMw5srjA3EgE4NdYS2EpkYlQCcMqsKHCjzqwIBQCAX7UC0Ak7cJ3UlGgF4BRbXeAitfmQC8Cpt8bAOYKToRgAAE7ZAARTD3yiOROiAThV1xv4U3YadANwCq868FN5DqQDcGqvPRCfAPUAnPI7ALKcfQE4newD6HHqTwLwk90AHc773wTgH/YEFDjpPwnAv9gZMJsz/isB+J39AVM53b8RgA/YJTCPc/0nAfiYvQKTONEf+uvp6Wnvazi09+8ve18CcD2j/xOeAL5g98C6nN/PCcDX7CFYkZP7Ja+ALuB1ECzB6D+TJ4AL2FVwfM7p+QTgMvYWHJkTehGvgK7kdRAcitF/BQG4iQzA7oz+q3kFdBM7D/blDN7CE8A2PArAgxn9txOALckAPIDRvxUB2J4MwJ0Y/dsSgHuRAdiQ0X8PAnBfMgA3MvrvRwAeRAngIub+AwjAQ8kAfMnofxgB2IcSwG/M/ccTgJ0pAXHm/o4E4EDEgAhD/yAE4Lj0gDFM/GMSgMWoAgdn1i9EAACi/DVQgCgBAIgSAIAoAQCIEgCAKAEAiBIAgCgBAIgSAIAoAQCIEgCAKAEAiBIAgCgBAIgSAIAoAQCIEgCAKAEAiBIAgCgBAIgSAIAoAQCIEgCAKAEAiBIAgCgBAIgSAIAoAQCIEgCAKAEAiBIAgCgBAIgSAIAoAQCIEgCAKAEAiBIAgCgBAIgSAIAoAQCIEgCAKAEAiBIAgCgBAIgSAIAoAQCIEgCAKAEAiBIAgCgBAIgSAIAoAQCIEgCAKAEAiBIAgCgBAIgSAIAoAQCIEgCAqP8Dnmny6PY8yacAAAAASUVORK5CYII=">
+<title>Gym Log</title>
+<!--
+  Gym Log - Offline-Trainingslog (PWA)
+  =====================================
+  * Plan-JSON importieren (Ausgabe von: repx_client_v4.py export)
+  * Im Gym Übungen + Geräteeinstellungen ansehen, Sätze loggen
+  * Am Ende training.json exportieren (Eingabe fuer: repx_client_v4.py upload)
+  Alle Daten bleiben lokal im Browser-Speicher (localStorage) des Handys.
+
+  Changelog
+  v1 (2026-10-04): Erste Version (Plan-Import, Logging, Pausentimer,
+                   lokaler Verlauf, Export per Teilen/Download).
+  v2 (2026-10-04): App-Icon als Data-URI eingebettet (Icon auch fuer
+                   Verknuepfungen auf die lokale HTML-Datei).
+-->
+<style>
+  /* ---------- Farben: angelehnt an die Gym-Website (dunkel, gelber Akzent) ---------- */
+  :root {
+    --bg: #0a0a0a;
+    --surface: #141414;
+    --surface-2: #1c1c1c;
+    --border: rgba(246, 234, 38, 0.12);
+    --border-strong: rgba(246, 234, 38, 0.3);
+    --accent: #f6ea26;
+    --accent-dim: rgba(246, 234, 38, 0.1);
+    --text: #f0f0f0;
+    --muted: #a1a1aa;
+    --subtle: #71717a;
+    --ok: #4ade80;
+    --ok-dim: rgba(74, 222, 128, 0.08);
+    --danger: #f87171;
+    --radius: 18px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--text); }
+  body {
+    font: 16px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    padding-bottom: calc(96px + env(safe-area-inset-bottom));
+    -webkit-tap-highlight-color: transparent;
+  }
+  main { max-width: 640px; margin: 0 auto; padding: 0 16px; }
+  h1 { font-size: 28px; font-weight: 900; letter-spacing: -0.02em; margin: 8px 0 4px; }
+  h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--subtle); margin: 28px 0 10px; }
+  h3 { font-size: 18px; margin: 0; }
+  p { margin: 0; }
+  .muted { color: var(--muted); }
+  .small { font-size: 13px; }
+
+  /* ---------- Kopfzeile ---------- */
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: calc(10px + env(safe-area-inset-top)) 16px 10px;
+  }
+  .bar { max-width: 640px; margin: 0 auto; display: flex; align-items: center; gap: 12px; min-height: 40px; }
+  .bar .title { flex: 1; font-weight: 800; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .clock { font: 700 18px ui-monospace, monospace; color: var(--accent); }
+
+  /* ---------- Bausteine ---------- */
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 16px; margin-bottom: 12px;
+  }
+  .card.done { border-color: rgba(74, 222, 128, 0.35); }
+  .row { display: flex; align-items: center; gap: 10px; }
+  .grow { flex: 1; min-width: 0; }
+  .badge {
+    display: inline-block; font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.06em; color: var(--muted); background: rgba(255,255,255,0.05);
+    border-radius: 6px; padding: 3px 7px; margin: 6px 6px 0 0;
+  }
+  .num {
+    width: 36px; height: 36px; border-radius: 10px; background: var(--surface-2);
+    display: grid; place-items: center; font-weight: 800; color: var(--subtle); flex: none;
+  }
+  .card.done .num { background: var(--ok-dim); color: var(--ok); }
+  .settings { display: grid; grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); gap: 8px; margin-top: 12px; }
+  .setting {
+    background: var(--accent-dim); border: 1px solid var(--border-strong);
+    border-radius: 12px; padding: 8px; text-align: center;
+  }
+  .setting .k { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+  .setting .v { font-size: 20px; font-weight: 900; color: var(--accent); }
+  .targets { color: var(--muted); font-size: 14px; margin-top: 8px; }
+  .note { margin-top: 10px; font-size: 14px; font-style: italic; color: var(--muted); }
+
+  button, .btn {
+    font: inherit; font-weight: 700; border: 0; border-radius: 14px; cursor: pointer;
+    padding: 12px 16px; background: var(--surface-2); color: var(--text);
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  button.primary { background: var(--accent); color: #000; }
+  button.ghost { background: transparent; border: 1px solid var(--border-strong); color: var(--text); }
+  button.danger { background: transparent; border: 1px solid rgba(248,113,113,0.4); color: var(--danger); }
+  button.icon { padding: 8px 12px; border-radius: 10px; }
+  button:active { transform: scale(0.98); }
+  .full { width: 100%; }
+
+  /* ---------- Sätze ---------- */
+  .sets { margin-top: 14px; display: grid; gap: 8px; }
+  .set { display: grid; grid-template-columns: 28px 1fr 1fr 52px; gap: 8px; align-items: center; }
+  .set.timeonly { grid-template-columns: 28px 1fr 52px; }
+  .set .idx { color: var(--subtle); font-weight: 800; text-align: center; }
+  .field { position: relative; }
+  .field span {
+    position: absolute; left: 10px; top: 50%; transform: translateY(-50%);
+    font-size: 11px; font-weight: 800; color: var(--subtle); pointer-events: none;
+  }
+  .field input {
+    width: 100%; font: 700 18px ui-monospace, monospace; text-align: right;
+    background: var(--bg); color: var(--text); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px; padding: 11px 10px 11px 44px;
+  }
+  .field input:focus { outline: none; border-color: var(--accent); }
+  .set.ok input { border-color: rgba(74,222,128,0.35); background: var(--ok-dim); }
+  .check {
+    height: 46px; border-radius: 12px; background: var(--accent); color: #000; font-size: 20px; padding: 0;
+  }
+  .set.ok .check { background: var(--ok-dim); color: var(--ok); border: 1px solid rgba(74,222,128,0.4); }
+
+  textarea {
+    width: 100%; min-height: 90px; resize: vertical; font: inherit; color: var(--text);
+    background: var(--bg); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 12px;
+  }
+  .progress { height: 8px; background: var(--surface-2); border-radius: 99px; overflow: hidden; margin-top: 8px; }
+  .progress > div { height: 100%; background: var(--accent); width: 0; transition: width .3s; }
+
+  /* ---------- Untere Leiste (Hauptaktion + Pausentimer) ---------- */
+  .dock {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 20;
+    padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+    background: color-mix(in srgb, var(--bg) 92%, transparent);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid var(--border);
+  }
+  .dock .inner { max-width: 640px; margin: 0 auto; display: grid; gap: 8px; }
+  .rest { display: flex; align-items: center; gap: 12px; }
+  .rest .t { font: 800 22px ui-monospace, monospace; color: var(--accent); min-width: 64px; }
+  .rest .progress { flex: 1; margin: 0; }
+
+  .toast {
+    position: fixed; left: 50%; top: calc(70px + env(safe-area-inset-top)); transform: translateX(-50%);
+    background: var(--surface-2); border: 1px solid var(--border-strong); color: var(--text);
+    padding: 10px 16px; border-radius: 12px; z-index: 50; font-size: 14px; max-width: 90vw;
+  }
+  .empty { text-align: center; padding: 28px 16px; color: var(--muted); }
+  label.switch { display: flex; align-items: center; gap: 12px; padding: 6px 0; }
+  label.switch input[type="checkbox"] { flex: none; width: 22px; height: 22px; accent-color: var(--accent); }
+  input.small-num {
+    flex: none; width: 84px; font: 700 16px ui-monospace, monospace; text-align: right; padding: 8px;
+    background: var(--bg); color: var(--text); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px;
+  }
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+<header><div class="bar" id="topbar"></div></header>
+<main id="app"></main>
+<div class="dock hidden" id="dock"><div class="inner" id="dockInner"></div></div>
+<input type="file" id="fileInput" accept="application/json,.json" class="hidden">
+
+<script>
+"use strict";
+/* =====================================================================
+ * 1) Speicher (localStorage) - jeder Zugriff in try/catch, damit die App
+ *    auch bei blockiertem Speicher (privater Modus) nicht abstuerzt.
+ * ===================================================================== */
+const KEYS = { plans: "gym.plans", active: "gym.active", history: "gym.history", settings: "gym.settings" };
+
+function load(key, fallback) {
+  try { const raw = localStorage.getItem(key); return raw ? JSON.parse(raw) : fallback; }
+  catch { return fallback; }
+}
+function save(key, value) {
+  try { localStorage.setItem(key, JSON.stringify(value)); }
+  catch { toast("Speichern fehlgeschlagen (Speicher voll oder blockiert)"); }
+}
+
+let plans    = load(KEYS.plans, {});      // { planId: Plan-JSON aus dem export }
+let active   = load(KEYS.active, null);   // laufendes Workout (siehe startWorkout)
+let history  = load(KEYS.history, []);    // abgeschlossene Trainings (Upload-Format)
+let settings = Object.assign({ reduceThird: true, rest: 60 }, load(KEYS.settings, {}));
+
+// Browser bitten, die Daten nicht automatisch zu löschen (Android: meist gewaehrt)
+if (navigator.storage && navigator.storage.persist) navigator.storage.persist();
+
+let view = active ? { name: "plan", id: String(active.plan_id) } : { name: "home" };
+
+/* =====================================================================
+ * 2) Hilfsfunktionen
+ * ===================================================================== */
+const $ = (sel) => document.querySelector(sel);
+
+// HTML-Escaping fuer alle Texte aus Dateien (verhindert kaputtes Layout/Injection)
+function esc(s) {
+  return String(s ?? "").replace(/[&<>"']/g, (c) =>
+    ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+}
+
+// Lokale Zeit mit Offset, z.B. "2026-10-04T18:05:00+02:00" (Python: datetime.fromisoformat)
+function isoLocal(d = new Date()) {
+  const p = (n) => String(Math.abs(n)).padStart(2, "0");
+  const off = -d.getTimezoneOffset();
+  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}T${p(d.getHours())}:` +
+         `${p(d.getMinutes())}:${p(d.getSeconds())}${off >= 0 ? "+" : "-"}${p(Math.trunc(off / 60))}:${p(off % 60)}`;
+}
+
+function fmtDuration(sec) {
+  sec = Math.max(0, Math.floor(sec));
+  const h = Math.floor(sec / 3600), m = Math.floor((sec % 3600) / 60), s = sec % 60;
+  return (h ? h + ":" : "") + String(m).padStart(h ? 2 : 1, "0") + ":" + String(s).padStart(2, "0");
+}
+
+function fmtDate(iso) {
+  const d = new Date(iso);
+  return d.toLocaleDateString("de-CH", { weekday: "short", day: "2-digit", month: "2-digit", year: "numeric" }) +
+         " " + d.toLocaleTimeString("de-CH", { hour: "2-digit", minute: "2-digit" });
+}
+
+// Zahleneingabe robust parsen (auch "22,5" mit Komma)
+function num(v) {
+  if (v === null || v === undefined || v === "") return null;
+  const n = parseFloat(String(v).replace(",", "."));
+  return Number.isFinite(n) ? n : null;
+}
+
+let toastTimer;
+function toast(msg) {
+  let el = $(".toast");
+  if (!el) { el = document.createElement("div"); el.className = "toast"; document.body.appendChild(el); }
+  el.textContent = msg;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.remove(), 2600);
+}
+
+/* =====================================================================
+ * 3) Plan-Import (Datei aus repx_client export, z.B. plan_272.json)
+ * ===================================================================== */
+function importPlanFile(file) {
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      const plan = JSON.parse(reader.result);
+      if (!plan.training_plan_id || !Array.isArray(plan.exercises)) throw new Error("kein Plan-JSON");
+      const id = String(plan.training_plan_id);
+      const existed = !!plans[id];
+      plans[id] = plan;
+      save(KEYS.plans, plans);
+      toast(`${plan.plan_name || "Plan " + id} ${existed ? "aktualisiert" : "importiert"}`);
+      render();
+    } catch (e) {
+      toast("Ungültige Datei: " + e.message);
+    }
+  };
+  reader.readAsText(file);
+}
+
+/* =====================================================================
+ * 4) Workout-Logik
+ * ===================================================================== */
+const isTimeBased = (ex) => ex.is_time_based || ex.sets.every((s) => s.duration != null && s.reps == null);
+
+// Vorbelegung eines Satzes aus dem Plan. Im 3. Satz optional 1 Wdh. weniger,
+// damit die Website das Gewicht nicht automatisch erhoeht (wie im Python-Template).
+function prefillSet(planSet, index, timeBased) {
+  let reps = planSet.reps != null ? parseInt(planSet.reps, 10) : null;
+  if (settings.reduceThird && !timeBased && index === 2 && reps > 1) reps -= 1;
+  return {
+    weight: planSet.weight != null ? num(planSet.weight) : null,
+    reps: reps,
+    duration: planSet.duration != null ? parseInt(planSet.duration, 10) : null,
+    done: false,
+  };
+}
+
+function startWorkout(planId) {
+  const plan = plans[planId];
+  active = {
+    plan_id: plan.training_plan_id,
+    started_at: isoLocal(),
+    started_ms: Date.now(),
+    notes: "",
+    sets: {},     // { plan_exercise_id: [ {weight, reps, duration, done}, ... ] }
+  };
+  for (const ex of plan.exercises) {
+    const tb = isTimeBased(ex);
+    active.sets[ex.plan_exercise_id] = ex.sets.map((s, i) => prefillSet(s, i, tb));
+  }
+  save(KEYS.active, active);
+  render();
+}
+
+function countSets() {
+  let done = 0, total = 0;
+  for (const arr of Object.values(active?.sets || {})) {
+    total += arr.length; done += arr.filter((s) => s.done).length;
+  }
+  return { done, total };
+}
+
+// Training im Format von repx_client upload: nur abgeschlossene Sätze,
+// Übungen ohne abgeschlossenen Satz fallen weg.
+function buildTraining() {
+  const plan = plans[String(active.plan_id)];
+  const exercises = [];
+  for (const ex of plan.exercises) {
+    const sets = (active.sets[ex.plan_exercise_id] || [])
+      .filter((s) => s.done)
+      .map((s) => {
+        const out = {};
+        if (s.weight != null) out.weight = s.weight;
+        if (s.reps != null) out.reps = s.reps;
+        if (s.duration != null) out.duration = s.duration;
+        return out;
+      });
+    if (sets.length) exercises.push({ plan_exercise_id: ex.plan_exercise_id, name: ex.name, sets });
+  }
+  return {
+    training_plan_id: active.plan_id,
+    plan_name: plan.plan_name,
+    started_at: active.started_at,
+    finished_at: isoLocal(),
+    notes: active.notes || "",
+    exercises,
+  };
+}
+
+function finishWorkout() {
+  const { done } = countSets();
+  if (done === 0) { toast("Noch kein Satz abgeschlossen"); return; }
+  if (!confirm(`Workout beenden? ${done} Sätze werden gespeichert.`)) return;
+  const training = buildTraining();
+  history.unshift(training);
+  history = history.slice(0, 100);           // lokal max. 100 Trainings behalten
+  save(KEYS.history, history);
+  active = null;
+  save(KEYS.active, null);
+  stopRest();
+  view = { name: "done", idx: 0 };
+  render();
+}
+
+function cancelWorkout() {
+  if (!confirm("Workout wirklich verwerfen? Alle Einträge gehen verloren.")) return;
+  active = null;
+  save(KEYS.active, null);
+  stopRest();
+  render();
+}
+
+/* =====================================================================
+ * 5) Export: Teilen (Android-Teilen-Menue, z.B. ProtonDrive) oder Download
+ * ===================================================================== */
+function trainingFileName(t) {
+  return "training_" + t.started_at.slice(0, 16).replace(/[-:]/g, "").replace("T", "_") + ".json";
+}
+
+async function exportTraining(t, mode) {
+  const name = trainingFileName(t);
+  const blob = new Blob([JSON.stringify(t, null, 2)], { type: "application/json" });
+  if (mode === "share") {
+    const file = new File([blob], name, { type: "application/json" });
+    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+      try { await navigator.share({ files: [file], title: name }); return; }
+      catch (e) { if (e.name === "AbortError") return; }   // Nutzer hat abgebrochen
+    }
+    toast("Teilen nicht möglich - lade stattdessen herunter");
+  }
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = name;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+}
+
+/* =====================================================================
+ * 6) Pausentimer (startet nach jedem abgeschlossenen Satz)
+ * ===================================================================== */
+let rest = null;   // { end: ms, total: s, interval }
+
+function startRest() {
+  stopRest();
+  if (!settings.rest) return;
+  rest = { end: Date.now() + settings.rest * 1000, total: settings.rest };
+  rest.interval = setInterval(updateRest, 250);
+  updateRest();
+}
+function stopRest() {
+  if (rest) clearInterval(rest.interval);
+  rest = null;
+  renderDock();
+}
+function updateRest() {
+  if (!rest) return;
+  const left = Math.ceil((rest.end - Date.now()) / 1000);
+  if (left <= 0) {
+    if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
+    stopRest();
+    return;
+  }
+  renderDock(left);
+}
+
+/* =====================================================================
+ * 7) Darstellung
+ * ===================================================================== */
+function render() {
+  if (view.name === "plan" && !plans[view.id]) view = { name: "home" };
+  if (view.name === "home") renderHome();
+  else if (view.name === "plan") renderPlan(view.id);
+  else if (view.name === "done") renderDone(view.idx);
+  renderDock();
+  window.scrollTo({ top: view.keepScroll ? window.scrollY : 0 });
+}
+
+function renderTopbar(title, back) {
+  $("#topbar").innerHTML =
+    (back ? `<button class="icon ghost" data-action="home" aria-label="Zurück">&larr;</button>` : "") +
+    `<div class="title">${esc(title)}</div>` +
+    (active ? `<div class="clock" id="clock">${fmtDuration((Date.now() - active.started_ms) / 1000)}</div>` : "");
+}
+
+function renderHome() {
+  renderTopbar("Gym Log", false);
+  const planList = Object.values(plans);
+  const activePlan = active ? plans[String(active.plan_id)] : null;
+  $("#app").innerHTML = `
+    ${activePlan ? `
+      <div class="card" style="margin-top:16px;border-color:var(--border-strong)">
+        <p class="small muted">Workout läuft</p>
+        <h3>${esc(activePlan.plan_name)}</h3>
+        <button class="primary full" style="margin-top:12px" data-action="open" data-id="${esc(active.plan_id)}">Weiter trainieren</button>
+      </div>` : ""}
+
+    <h2>Trainingspläne</h2>
+    ${planList.length ? planList.map((p) => `
+      <div class="card row" data-action="open" data-id="${esc(p.training_plan_id)}">
+        <div class="grow">
+          <h3>${esc(p.plan_name || "Plan " + p.training_plan_id)}</h3>
+          <p class="small muted">${p.exercises.length} Übungen &middot; ${p.exercises.reduce((a, e) => a + e.sets.length, 0)} Sätze
+            &middot; Export ${esc((p.exported_at || "").slice(0, 10))}</p>
+        </div>
+        <span class="muted">&rsaquo;</span>
+      </div>`).join("") : `<div class="card empty">Noch kein Plan. Importiere <b>plan_&lt;id&gt;.json</b> aus dem Python-Export.</div>`}
+    <button class="ghost full" data-action="import">Plan importieren / aktualisieren</button>
+
+    <h2>Verlauf (lokal)</h2>
+    ${history.length ? history.map((t, i) => {
+      const n = t.exercises.reduce((a, e) => a + e.sets.length, 0);
+      return `
+      <div class="card">
+        <div class="row">
+          <div class="grow">
+            <h3>${esc(t.plan_name || "Plan " + t.training_plan_id)}</h3>
+            <p class="small muted">${esc(fmtDate(t.started_at))} &middot; ${t.exercises.length} Übungen &middot; ${n} Sätze</p>
+          </div>
+        </div>
+        <div class="row" style="margin-top:12px">
+          <button class="primary grow" data-action="share" data-idx="${i}">Teilen</button>
+          <button class="ghost grow" data-action="download" data-idx="${i}">Download</button>
+          <button class="danger icon" data-action="delhist" data-idx="${i}" aria-label="Löschen">&times;</button>
+        </div>
+      </div>`; }).join("") : `<div class="card empty">Noch keine Trainings.</div>`}
+
+    <h2>Einstellungen</h2>
+    <div class="card">
+      <label class="switch"><input type="checkbox" data-setting="reduceThird" ${settings.reduceThird ? "checked" : ""}>
+        <span>3. Satz mit 1 Wdh. weniger vorbelegen<br><span class="small muted">verhindert die automatische Gewichtssteigerung</span></span></label>
+      <label class="switch"><span class="grow">Pausentimer (Sekunden, 0 = aus)</span>
+        <input class="small-num" type="number" inputmode="numeric" min="0" step="5" data-setting="rest" value="${settings.rest}"></label>
+    </div>
+    <p class="small muted" style="text-align:center;margin:20px 0">Gym Log v2 &middot; Daten nur auf diesem Gerät</p>`;
+}
+
+function renderPlan(id) {
+  const plan = plans[id];
+  const running = active && String(active.plan_id) === id;
+  const otherRunning = active && !running;
+  renderTopbar(plan.plan_name || "Plan " + id, true);
+  const { done, total } = countSets();
+
+  $("#app").innerHTML = `
+    <div style="margin-top:12px">
+      ${running ? `
+        <div class="card">
+          <div class="row"><span class="grow muted small">Fortschritt</span><b>${done} / ${total} Sätze</b></div>
+          <div class="progress"><div style="width:${total ? (100 * done / total) : 0}%"></div></div>
+        </div>` : ""}
+      ${otherRunning ? `<div class="card small muted">In einem anderen Plan läuft bereits ein Workout.</div>` : ""}
+      ${plan.exercises.map((ex) => renderExercise(ex, running)).join("")}
+      ${running ? `
+        <div class="card">
+          <h3 style="margin-bottom:10px">Notizen</h3>
+          <textarea data-input="notes" placeholder="Wie war das Training?">${esc(active.notes)}</textarea>
+        </div>
+        <button class="danger full" data-action="cancel">Workout verwerfen</button>` : ""}
+      <p class="small muted" style="text-align:center;margin:16px 0">Plan-Export: ${esc(plan.exported_at || "?")}</p>
+    </div>`;
+}
+
+function renderExercise(ex, running) {
+  const settingsHtml = Object.entries(ex.settings || {}).map(([k, v]) =>
+    `<div class="setting"><div class="k">${esc(k)}</div><div class="v">${esc(v)}</div></div>`).join("");
+  const t = ex.targets || {};
+  const targetText = [t.sets && `${t.sets} Sets`, t.reps && `${t.reps} Wdh.`, t.kg && `${t.kg} kg`, t.sek && `${t.sek} s`]
+    .filter(Boolean).join(" &middot; ");
+  const sets = running ? active.sets[ex.plan_exercise_id] || [] : [];
+  const allDone = running && sets.length && sets.every((s) => s.done);
+  const tb = isTimeBased(ex);
+
+  return `
+  <div class="card ${allDone ? "done" : ""}" id="ex-${ex.plan_exercise_id}">
+    <div class="row">
+      <div class="num">${allDone ? "&check;" : esc(ex.order ?? "")}</div>
+      <div class="grow">
+        <h3>${esc(ex.name)}</h3>
+        <div>${ex.machine ? `<span class="badge">${esc(ex.machine)}</span>` : ""}${ex.type ? `<span class="badge">${esc(ex.type)}</span>` : ""}</div>
+      </div>
+    </div>
+    ${settingsHtml ? `<div class="settings">${settingsHtml}</div>` : ""}
+    ${targetText ? `<div class="targets">Soll: ${targetText}</div>` : ""}
+    ${ex.note ? `<div class="note">${esc(ex.note)}</div>` : ""}
+    ${running ? `<div class="sets">${sets.map((s, i) => renderSet(ex.plan_exercise_id, i, s, tb)).join("")}</div>` : ""}
+  </div>`;
+}
+
+// type="text" + inputmode statt type="number": number-Felder verwerfen auf
+// manchen Android-Geräten "22,5" (Komma). num() wandelt Komma selbst um.
+function renderSet(pid, i, s, timeBased) {
+  const val = (v) => (v == null ? "" : esc(v));
+  const attrs = (field) => `data-input="set" data-pid="${pid}" data-i="${i}" data-field="${field}"`;
+  return `
+  <div class="set ${s.done ? "ok" : ""} ${timeBased ? "timeonly" : ""}">
+    <div class="idx">${i + 1}</div>
+    ${timeBased ? `
+      <label class="field"><span>SEK</span><input type="text" inputmode="numeric" autocomplete="off" ${attrs("duration")} value="${val(s.duration)}"></label>` : `
+      <label class="field"><span>KG</span><input type="text" inputmode="decimal" autocomplete="off" ${attrs("weight")} value="${val(s.weight)}" placeholder="&ndash;"></label>
+      <label class="field"><span>WDH</span><input type="text" inputmode="numeric" autocomplete="off" ${attrs("reps")} value="${val(s.reps)}"></label>`}
+    <button class="check" data-action="toggle" data-pid="${pid}" data-i="${i}" aria-label="Satz abschliessen">${s.done ? "&#8630;" : "&check;"}</button>
+  </div>`;
+}
+
+function renderDone(idx) {
+  const t = history[idx];
+  renderTopbar("Workout gespeichert", true);
+  const n = t.exercises.reduce((a, e) => a + e.sets.length, 0);
+  const dur = (new Date(t.finished_at) - new Date(t.started_at)) / 1000;
+  $("#app").innerHTML = `
+    <div class="card" style="margin-top:16px;text-align:center">
+      <div style="font-size:44px">&#127942;</div>
+      <h1>Gut gemacht!</h1>
+      <p class="muted">${esc(t.plan_name)} &middot; ${t.exercises.length} Übungen &middot; ${n} Sätze &middot; ${fmtDuration(dur)}</p>
+    </div>
+    <div class="card">
+      ${t.exercises.map((e) => `<p><b>${esc(e.name)}</b><br><span class="small muted">${e.sets.map((s) =>
+        s.duration != null ? `${s.duration}s` : `${s.weight != null ? s.weight + " kg" : "KG"} &times; ${s.reps}`).join(" &middot; ")}</span></p>`).join("<br>")}
+    </div>
+    <p class="small muted" style="margin:0 0 12px">Datei an den PC schicken (z.B. ProtonDrive) und dort mit
+      <code>main(["upload", "&lt;datei&gt;.json"])</code> hochladen.</p>
+    <div class="row">
+      <button class="primary grow" data-action="share" data-idx="${idx}">Teilen</button>
+      <button class="ghost grow" data-action="download" data-idx="${idx}">Download</button>
+    </div>`;
+}
+
+// Untere Leiste: Pausentimer und/oder Hauptaktion des aktuellen Screens
+function renderDock(restLeft) {
+  const dock = $("#dock"), inner = $("#dockInner");
+  const parts = [];
+  if (rest) {
+    const left = restLeft ?? Math.ceil((rest.end - Date.now()) / 1000);
+    parts.push(`<div class="rest"><div class="t">${fmtDuration(left)}</div>
+      <div class="progress"><div style="width:${100 * left / rest.total}%"></div></div>
+      <button class="icon ghost" data-action="skiprest">Pause &raquo;</button></div>`);
+  }
+  if (view.name === "plan") {
+    const running = active && String(active.plan_id) === view.id;
+    if (running) parts.push(`<button class="primary full" data-action="finish">Workout beenden</button>`);
+    else if (!active) parts.push(`<button class="primary full" data-action="start">Workout starten</button>`);
+  }
+  inner.innerHTML = parts.join("");
+  dock.classList.toggle("hidden", parts.length === 0);
+}
+
+/* =====================================================================
+ * 8) Ereignisse (Event-Delegation: ein Listener fuer alle Buttons/Felder)
+ * ===================================================================== */
+document.addEventListener("click", (e) => {
+  const el = e.target.closest("[data-action]");
+  if (!el) return;
+  const a = el.dataset.action;
+  if (a === "home") { view = { name: "home" }; render(); }
+  else if (a === "open") { view = { name: "plan", id: String(el.dataset.id) }; render(); }
+  else if (a === "import") $("#fileInput").click();
+  else if (a === "start") startWorkout(view.id);
+  else if (a === "finish") finishWorkout();
+  else if (a === "cancel") cancelWorkout();
+  else if (a === "skiprest") stopRest();
+  else if (a === "share") exportTraining(history[+el.dataset.idx], "share");
+  else if (a === "download") exportTraining(history[+el.dataset.idx], "download");
+  else if (a === "delhist") {
+    if (confirm("Training aus dem lokalen Verlauf löschen?")) {
+      history.splice(+el.dataset.idx, 1); save(KEYS.history, history); render();
+    }
+  }
+  else if (a === "toggle") {
+    // Satz abschliessen bzw. wieder oeffnen; Pausentimer nach dem Abschliessen
+    const s = active.sets[el.dataset.pid][+el.dataset.i];
+    s.done = !s.done;
+    save(KEYS.active, active);
+    const y = window.scrollY;
+    renderPlan(view.id);
+    window.scrollTo({ top: y });
+    if (s.done) startRest(); else renderDock();
+  }
+});
+
+// Eingaben sofort speichern (App kann jederzeit geschlossen werden)
+document.addEventListener("input", (e) => {
+  const el = e.target;
+  if (el.dataset.input === "set") {
+    const s = active.sets[el.dataset.pid][+el.dataset.i];
+    const v = num(el.value);
+    s[el.dataset.field] = el.dataset.field === "weight" ? v : (v == null ? null : Math.round(v));
+    save(KEYS.active, active);
+  } else if (el.dataset.input === "notes") {
+    active.notes = el.value;
+    save(KEYS.active, active);
+  } else if (el.dataset.setting === "reduceThird") {
+    settings.reduceThird = el.checked; save(KEYS.settings, settings);
+  } else if (el.dataset.setting === "rest") {
+    settings.rest = Math.max(0, parseInt(el.value || "0", 10)); save(KEYS.settings, settings);
+  }
+});
+
+$("#fileInput").addEventListener("change", (e) => {
+  if (e.target.files[0]) importPlanFile(e.target.files[0]);
+  e.target.value = "";
+});
+
+// Workout-Uhr in der Kopfzeile jede Sekunde aktualisieren
+setInterval(() => {
+  const c = $("#clock");
+  if (c && active) c.textContent = fmtDuration((Date.now() - active.started_ms) / 1000);
+}, 1000);
+
+/* =====================================================================
+ * 9) Start + Service Worker (nur ueber https bzw. localhost möglich)
+ * ===================================================================== */
+render();
+if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) {
+  navigator.serviceWorker.register("sw.js").catch(() => {});
+}
+</script>
+</body>
+</html>
