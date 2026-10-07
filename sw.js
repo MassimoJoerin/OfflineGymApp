@@ -7,11 +7,12 @@
  * v1 (2026-10-04): Erste Version.
  * v2 (2026-10-04): Cache-Version fuer index.html v2 (eingebettetes Icon).
  * v3 (2026-10-04): Neue Icons (maskable randlos gelb, kein schwarzer Rand).
+ * v4 (2026-10-07): Cache-Version fuer index.html v4 (Satz-Zaehler).
  *
  * WICHTIG: Bei jeder Aenderung an index.html CACHE_VERSION erhoehen, sonst
  * liefert das Handy weiterhin die alte Version aus dem Cache.
  */
-const CACHE_VERSION = "gym-log-v3";
+const CACHE_VERSION = "gym-log-v4";
 const APP_FILES = [
   "./",
   "./index.html",

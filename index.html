@@ -28,6 +28,8 @@
                    Verknuepfungen auf die lokale HTML-Datei).
   v3 (2026-10-04): Neue Icons: maskable-Icon randlos gelb (Android zeigte
                    sonst einen dicken schwarzen Rand), Hantel groesser.
+  v4 (2026-10-07): Satz-Zaehler (erledigt/alle, z.B. 18/28) links neben der
+                   Workout-Uhr in der Kopfzeile; gruen bei 100 %.
 -->
 <style>
   /* ---------- Farben: angelehnt an die Gym-Website (dunkel, gelber Akzent) ---------- */
@@ -73,6 +75,8 @@
   .bar { max-width: 640px; margin: 0 auto; display: flex; align-items: center; gap: 12px; min-height: 40px; }
   .bar .title { flex: 1; font-weight: 800; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .clock { font: 700 18px ui-monospace, monospace; color: var(--accent); }
+  .setcount { font: 700 18px ui-monospace, monospace; color: var(--muted); white-space: nowrap; }
+  .setcount.complete { color: var(--ok); }
 
   /* ---------- Bausteine ---------- */
   .card {
@@ -435,7 +439,16 @@ function renderTopbar(title, back) {
   $("#topbar").innerHTML =
     (back ? `<button class="icon ghost" data-action="home" aria-label="Zurück">&larr;</button>` : "") +
     `<div class="title">${esc(title)}</div>` +
-    (active ? `<div class="clock" id="clock">${fmtDuration((Date.now() - active.started_ms) / 1000)}</div>` : "");
+    (active ? renderSetCount() +
+              `<div class="clock" id="clock">${fmtDuration((Date.now() - active.started_ms) / 1000)}</div>` : "");
+}
+
+// Satz-Zaehler fuer die Kopfzeile, z.B. "18/28"; gruen, wenn alles erledigt.
+// Wird bei jedem Abhaken neu gerendert (toggle -> renderPlan -> renderTopbar).
+function renderSetCount() {
+  const { done, total } = countSets();
+  return `<div class="setcount ${total && done === total ? "complete" : ""}" ` +
+         `aria-label="${done} von ${total} Saetzen erledigt">${done}/${total}</div>`;
 }
 
 function renderHome() {
@@ -487,7 +500,7 @@ function renderHome() {
       <label class="switch"><span class="grow">Pausentimer (Sekunden, 0 = aus)</span>
         <input class="small-num" type="number" inputmode="numeric" min="0" step="5" data-setting="rest" value="${settings.rest}"></label>
     </div>
-    <p class="small muted" style="text-align:center;margin:20px 0">Gym Log v3 &middot; Daten nur auf diesem Gerät</p>`;
+    <p class="small muted" style="text-align:center;margin:20px 0">Gym Log v4 &middot; Daten nur auf diesem Gerät</p>`;
 }
 
 function renderPlan(id) {
